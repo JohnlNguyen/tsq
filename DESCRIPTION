@@ -1,0 +1,16 @@
+Package: tsq
+Version: 1.0.0
+Authors: Jeffrey Tai <jetai@ucdavis.edu> [cre,aut],
+	 John Nguyen <jolnguyen@ucdavis.edu> [cre,aut],
+	 Joanne Wang <jnewang@ucdavis.edu> [cre,aut],
+	 Eric Du <emdu@ucdavis.edu> [cre,aut]
+Title: Package for S3 Implementations of Binary Tree, Stack, Queue
+Description: Provides S3 classes and methods for binary tree,
+	stack, and queue data structures in R.
+Depends: R (>= 3.3.2)
+ByteCompile: yes
+NeedsCompilation: no
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/JohnlNguyen/Project_145
+BugReports: https://github.com/JohnlNguyen/Project_145

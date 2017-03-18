@@ -1,0 +1,4 @@
+export(push,pop,
+	newqueue,push.queue,pop.queue,print.queue,
+	stack,push.stack,pop.stack,print.stack
+)
