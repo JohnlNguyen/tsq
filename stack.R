@@ -24,5 +24,5 @@ pop.stack <- function(obj) {
 
 print.stack <- function(obj){
   if(length(obj$data) == 1) return()
-  print(obj$data)
+  print(obj$data[-1])
 }

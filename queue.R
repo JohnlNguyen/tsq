@@ -26,5 +26,5 @@ pop.queue <- function(obj) {
 
 print.queue <- function(obj){
   if(length(obj$data) == 1) return()
-  print(obj$data)
+  print(obj$data[-1])
 }
