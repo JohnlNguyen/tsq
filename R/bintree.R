@@ -1,4 +1,4 @@
-ntree <- function(){
+newbintree <- function(){
   tree <- new.env(parent=globalenv()) 
   tree$vals <- matrix(cbind(NA,NA,NA),nrow=1,ncol=3, dimnames = list(c(NULL),
                                                       c("Value","Left", "Right")) ) 
@@ -8,7 +8,7 @@ ntree <- function(){
 }
 
 push <- function(obj, val) UseMethod("push")
-pop <- function(obj, val) UseMethod("pop")
+pop <- function(obj) UseMethod("pop")
 
 # val <- graph[root,1]
 # left <- graph[root,2]
@@ -38,6 +38,27 @@ push.bintree <- function(obj,val) {
      return(obj$vals)
 }
 
+pop.bintree <- function(obj) {
+	if(nrow(obj$vals) == 1){ # Empty Tree
+		stop("Error: attempt to pop empty tree")
+	}
+	else val <- pop_helper(2,obj$vals)
+	return(val)
+}
+
+pop_helper <- function(root, graph){
+	if(!is.na(graph[root,1]) & is.na(graph[root,2]) & is.na(graph[root,3])) { # BASE CASE
+    val <- graph[root,1]
+    graph <- graph[-root,]
+		return(val)
+	}
+  if(!is.na(graph[root,1]) & is.na(graph[root,2]) & !is.na(graph[root,3])) { # BASE CASE
+    val <- graph[root,1]
+    graph <- graph[-root,]
+    return(val)
+  }
+	else pop_helper(graph[root,2], graph)
+}
 
 print.bintree <- function(tree) {
   obj <- tree$vals
@@ -54,15 +75,15 @@ print.bintree <- function(tree) {
 }
 
 ######## TEST CASE #################
-newbintree()
+tree <- newbintree()
 push(tree,7)
 push(tree,5)
 push(tree,6)
+pop(tree)
 push(tree,9)
 push(tree,4)
 push(tree,1)
 push(tree,30)
 push(tree,8)
 push(tree,10)
-
 
