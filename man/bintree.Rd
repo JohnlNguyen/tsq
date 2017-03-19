@@ -78,7 +78,7 @@
 \examples{
 	
 	# Initialize and set up our binary tree
-	tree <- newbintree()
+	tree <- newbintree()wp
 
 	# attempt to pop empty tree, will result in warning
 	pop(tree)
