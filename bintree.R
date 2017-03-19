@@ -38,6 +38,29 @@ push.bintree <- function(obj,val) {
      return(obj$vals)
 }
 
+pop_helper <- function(root,graph,path=c()){
+  if(is.na(graph[root,2])){ #Base Case
+    return(path)
+  }
+  path <- c(path,graph[root,2])
+  pop_helper(graph[root,2],graph,path)
+}
+
+pop.bintree <- function(tree){
+  path <- pop_helper(2,tree$vals)
+  node <- tail(path,1)
+  parent <- tail(path,2)[1]
+  top <- tree$vals[node,1]
+  # Update the structure 
+  tree$vals[parent,2] <- NA
+  tree$vals <- tree$vals[-node,]
+  # Update the left and right columns
+  m <-  matrix(rbind(0,1,1),ncol=3)
+  m <- matrix(rep(m,each=nrow(tree$vals)),nrow=nrow(tree$vals)) 
+  tree$vals <- tree$vals - m
+  return(top)
+}
+
 
 print.bintree <- function(tree) {
   obj <- tree$vals
@@ -54,7 +77,7 @@ print.bintree <- function(tree) {
 }
 
 ######## TEST CASE #################
-newbintree()
+tree <- newbintree()
 push(tree,7)
 push(tree,5)
 push(tree,6)
@@ -64,5 +87,6 @@ push(tree,1)
 push(tree,30)
 push(tree,8)
 push(tree,10)
+
 
 
