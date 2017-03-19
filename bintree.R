@@ -86,7 +86,6 @@ pop_helper <- function(graph, row, parent) {
   if(is.na(graph[row,2])) { # base case
     graph[parent,2] <- NA
     top <- graph[row,1]
-    print(top)
     graph[row,] <- NA
     return(top)
   }
