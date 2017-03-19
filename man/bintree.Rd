@@ -9,7 +9,7 @@
 \title{S3 Class Binary Tree Implementation}
 
 \description{
-	Binary Tree Class with print, push, pop methods
+	Binary Tree Class with print, push, pop methods. T a
 }
 
 \usage{
@@ -33,7 +33,7 @@
 }
 
 \details{
-	Implements a S3 class version of a Binary Tree in R with print,
+	Implements a S3 class version of a binary tpiree in R with print,
 	push and pop methods.
 
 	This implementation involves instantiating a new Environment with each
@@ -42,7 +42,7 @@
 
 	In our implementation the binary tree is stored as a matrix, where each row
 	is represented as a node with the value, row number of the its left child,
-	and row number of its right child as its column values, respectively.
+	and row number of its right child as its column values, respecti,tnvely.
 
 	Note the comments above \code{helper} that explain what how the value, left
 	child row, and right child row are accessed in the helper function.
@@ -67,7 +67,7 @@
 
 		\item \code{helper}, the matrix in which our binary tree is stored
 
-		\item \code{push.bintree}, the new version of matrix in which our
+		\item \code{push.bintree}, the new version of the matrix in which our
 		binary tree is stored
 
 		\item \code{pop.bintree}, the smallest element that was removed
@@ -78,7 +78,7 @@
 \examples{
 	
 	# Initialize and set up our binary tree
-	newbintree()
+	tree <- newbintree()
 
 	# attempt to pop empty tree, will result in warning
 	pop(tree)
@@ -101,4 +101,11 @@
 
 	# print out the binary tree
 	print(tree)
+}
+
+\authors{
+	Jeffrey Tai
+	John Nguyen
+	Joanne Wang
+	Eric Du
 }
