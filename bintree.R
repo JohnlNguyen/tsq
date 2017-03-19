@@ -14,53 +14,84 @@ pop <- function(obj, val) UseMethod("pop")
 # left <- graph[root,2]
 # right <- graph[root,3]
 # root <- the row of the node
-helper <- function(root, inVal ,graph){
+push_helper <- function(root, inVal ,graph){
   if(inVal < graph[root,1] & is.na(graph[root,2])){ #BASE CASE
-    graph <- rbind(graph,c(inVal,NA,NA))
-    graph[root,2] <- nrow(graph)
+    rowToInsert <- push_firstNArow(graph)
+    if(rowToInsert == -1) {
+      graph <- rbind(graph,c(inVal,NA,NA))
+      graph[root,2] <- nrow(graph)
+    } else {
+      graph[rowToInsert,] <- c(inVal,NA,NA)
+      graph[root,2] <- rowToInsert
+    }
     return(graph)
   }
   if(inVal > graph[root,1] & is.na(graph[root,3])){ #BASE CASE
-    graph <- rbind(graph,c(inVal,NA,NA))
-    graph[root,3] <- nrow(graph)
+    rowToInsert <- push_firstNArow(graph)
+    if(rowToInsert == -1) {
+      graph <- rbind(graph,c(inVal,NA,NA))
+      graph[root,3] <- nrow(graph)      
+    } else {
+      graph[rowToInsert,] <- c(inVal,NA,NA)
+      graph[root,3] <- rowToInsert
+    }
     return(graph)
   }
-  if(inVal < graph[root,1]) helper(graph[root,2],inVal,graph)
+  if(inVal < graph[root,1]) push_helper(graph[root,2],inVal,graph)
 
-  else helper(graph[root,3],inVal,graph)
+  else push_helper(graph[root,3],inVal,graph)
+}
+
+push_firstNArow <- function(graph) {
+  for(i in 2:nrow(graph)) {
+    if(all(is.na(graph[i,]))) return(i)
+  }
+  return(-1)
 }
 
 push.bintree <- function(obj,val) {
      if(nrow(obj$vals) == 1){ # Empty Tree
         obj$vals <- rbind(obj$vals,c(val,NA,NA))
+        return(obj$vals)
      }
-     else obj$vals <- helper(2,val,obj$vals)
+     if(nrow(obj$vals) > 1) { #possibly empty
+        if(is.na(obj$vals[2,1])){
+          obj$vals[2,] <- c(val,NA,NA)
+          return(obj$vals)
+        }
+      }
+     obj$vals <- push_helper(2,val,obj$vals)
      return(obj$vals)
 }
 
-pop_helper <- function(root,graph,path=c()){
-  if(is.na(graph[root,2])){ #Base Case
-    return(path)
+pop.bintree <- function(tree) {
+  if(nrow(tree$vals) < 2 || is.na(tree$vals[2,1])) stop("Tree is empty")
+  if(is.na(tree$vals[2,2])) { # checks if root is smallest item
+    if(is.na(tree$vals[2,3])) { # checks if there is only one item in tree
+      top <- tree$vals[2,1]
+      tree$vals[2,] <- NA
+      return(top)
+    }
+    newRoot <- tree$vals[2,3] # right subtree exists, assign new root to row 2
+    top <- tree$vals[2,1]
+    tree$vals[2,] <- tree$vals[newRoot,]
+    tree$vals[newRoot,] <- NA
+    return(top)
   }
-  path <- c(path,graph[root,2])
-  pop_helper(graph[root,2],graph,path)
+  pop_helper(tree$vals, tree$vals[2,2], 2)
+
 }
 
-pop.bintree <- function(tree){
-  path <- pop_helper(2,tree$vals)
-  node <- tail(path,1)
-  parent <- tail(path,2)[1]
-  top <- tree$vals[node,1]
-  # Update the structure 
-  tree$vals[parent,2] <- NA
-  tree$vals <- tree$vals[-node,]
-  # Update the left and right columns
-  m <-  matrix(rbind(0,1,1),ncol=3)
-  m <- matrix(rep(m,each=nrow(tree$vals)),nrow=nrow(tree$vals)) 
-  tree$vals <- tree$vals - m
-  return(top)
+pop_helper <- function(graph, row, parent) {
+  if(is.na(graph[row,2])) { # base case
+    graph[parent,2] <- NA
+    top <- graph[row,1]
+    print(top)
+    graph[row,] <- NA
+    return(top)
+  }
+  pop_helper(graph, graph[as.numeric(row),2], row)
 }
-
 
 print.bintree <- function(tree) {
   obj <- tree$vals
