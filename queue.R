@@ -1,5 +1,4 @@
 
-# make to take input
 newqueue <- function() {
   q <- new.env(parent=globalenv()) 
   q$data <- c(NA)

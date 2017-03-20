@@ -116,7 +116,7 @@ pop_helper <- function(tree, row, parent) {
         tree$vals[row,] <- NA
       }
       return(top)
-    } else { # dupliate remain, decrement count
+    } else { # duplicate remain, decrement count
       tree$vals[row, 4] <- as.numeric(tree$vals[row, 4]) - 1
     }
     return(top)
@@ -127,6 +127,7 @@ pop_helper <- function(tree, row, parent) {
 #################### print ####################
 print.bintree <- function(tree) {
   obj <- tree$vals
+  colnames(obj) <- NULL
   printhelper <- function(obj, row) {
     if(!is.na(obj[as.numeric(row),2])) {  # print left tree
       printhelper(obj,obj[as.numeric(row),2])
