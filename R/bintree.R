@@ -14,18 +14,22 @@ pop <- function(tree) UseMethod("pop")
 
 #################### push ####################
 push.bintree <- function(tree,val) {
-     if(nrow(tree$vals) == 1){ # Empty Tree
-        tree$vals <- rbind(tree$vals,c(val,NA,NA,1))
-        return(tree$vals)
-     }
-     if(nrow(tree$vals) > 1) { # Check for null root
-        if(is.na(tree$vals[2,1])){
-          tree$vals[2,] <- c(val,NA,NA,1)
-          return(tree$vals)
-        }
-      }
-     tree$vals <- push_helper(2,val,tree$vals)
-     return(tree$vals)
+  if(nrow(tree$vals) == 1){ # Empty Tree
+    tree$vals <- rbind(tree$vals,c(val,NA,NA,1))
+    return(tree$vals)
+  }
+  if(nrow(tree$vals) > 1) { # Check for null root (also an empty tree)
+    if(is.na(tree$vals[2,1])){
+      tree$vals[2,] <- c(val,NA,NA,1)
+      return(tree$vals)
+    }
+  }
+  # check if converting from numeric tree to char tree
+  if(is.numeric(tree$vals[2,1]) && is.character(val)) {
+    warning("Inserting char will cause previous values to convert to char.")
+  }
+  tree$vals <- push_helper(2,val,tree$vals)
+  return(tree$vals)
 }
 push_helper <- function(root, inVal, graph){
   root <- as.numeric(root)
