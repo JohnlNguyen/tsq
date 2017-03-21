@@ -15,7 +15,7 @@
 \usage{
 	newstack()
 	push(obj,val)
-	pop(obj,val)
+	pop(obj)
 	push.stack(obj,val)
 	pop.stack(obj)
 	print.stack(obj)
@@ -64,7 +64,7 @@
 
 \examples{
 	# Initialize and set up our stack
-	queue <- newstack()
+	stack <- newstack()
 
 	# attempt to pop empty stack, will result in warning
 	pop(stack)
@@ -87,7 +87,7 @@
 	print(stack)
 }
 
-\authors{
+\author{
 	Jeffrey Tai
 	John Nguyen
 	Joanne Wang

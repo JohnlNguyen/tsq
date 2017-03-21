@@ -15,7 +15,7 @@
 \usage{
 	newqueue()
 	push(obj,val)
-	pop(obj,val)
+	pop(obj)
 	push.queue(obj,val)
 	pop.queue(obj)
 	print.queue(obj)
@@ -87,7 +87,7 @@
 	print(queue)
 }
 
-\authors{
+\author{
 	Jeffrey Tai
 	John Nguyen
 	Joanne Wang

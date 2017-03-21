@@ -8,6 +8,8 @@
 #' 
 #' @examples
 #' q <- newqueue()
+#'
+#' @export
 newqueue <- function() {
   q <- new.env(parent=globalenv()) 
   q$data <- c(NA)
@@ -39,6 +41,8 @@ newqueue <- function() {
 #' push(q,"Hello")
 #' push(q,100)
 #' push(q,"Give me 100 cookies!")
+#'
+#' @export
 push <- function(obj, val) UseMethod("push")
 
 
@@ -59,6 +63,8 @@ push <- function(obj, val) UseMethod("push")
 #'
 #' @examples
 #' pop(q)
+#'
+#' @export
 pop <- function(obj) UseMethod("pop") 
 
 
@@ -83,6 +89,8 @@ pop <- function(obj) UseMethod("pop")
 #' push(q,"Hello")
 #' push(q,100)
 #' push(q,"Give me 100 cookies!")
+#'
+#' @export
 push.queue <- function(obj,val) { 
   if(is.na(val)) stop("Invalid type")
   obj$data <- c(obj$data,val) 
@@ -105,6 +113,8 @@ push.queue <- function(obj,val) {
 #'
 #' @examples
 #' pop(q)
+#'
+#' @export
 pop.queue <- function(obj) {
   if(length(obj$data) == 1)
     stop("Queue is empty")
@@ -128,6 +138,8 @@ pop.queue <- function(obj) {
 #'
 #' @examples
 #' print(q)
+#'
+#' @export
 print.queue <- function(obj){
   if(length(obj$data) == 1) return()
   print(obj$data[-1])

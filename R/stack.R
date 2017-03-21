@@ -8,6 +8,8 @@
 #' 
 #' @examples
 #' s <- stack()
+#'
+#' @export
 stack <- function() {
   st <- new.env(parent=globalenv())  
   st$data <- c(NA)
@@ -39,6 +41,8 @@ stack <- function() {
 #' push(s,"Hello")
 #' push(s,100)
 #' push(s,"Give me 100 cookies!")
+#'
+#' @export
 push <- function(obj, val) UseMethod("push") 
 
 
@@ -59,6 +63,8 @@ push <- function(obj, val) UseMethod("push")
 #'
 #' @examples
 #' pop(s)
+#'
+#' @export
 pop <- function(obj) UseMethod("pop") 
 
 
@@ -83,6 +89,8 @@ pop <- function(obj) UseMethod("pop")
 #' push(q,"Hello")
 #' push(q,100)
 #' push(q,"Give me 100 cookies!")
+#'
+#' @export
 push.stack <- function(obj,val) { 
   if(is.na(val)) stop("Invalid type")
   obj$data <- c(obj$data,val) 
@@ -105,6 +113,8 @@ push.stack <- function(obj,val) {
 #'
 #' @examples
 #' pop(s)
+#'
+#' @export
 pop.stack <- function(obj) {
   if(length(obj$data) == 1)
     stop("Stack is empty")
@@ -129,6 +139,8 @@ pop.stack <- function(obj) {
 #'
 #' @examples
 #' print(s)
+#'
+#' @export
 print.stack <- function(obj){
   if(length(obj$data) == 1) return()
   print(obj$data[-1])
