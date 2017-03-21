@@ -91,20 +91,18 @@ pop <- function(tree) UseMethod("pop")
 push.bintree <- function(tree,val) {
   if(nrow(tree$vals) == 1){ # Empty Tree
     tree$vals <- rbind(tree$vals,c(val,NA,NA,1))
-
-  } else { 
-    if(is.na(tree$vals[2,1])){ # Check for null root (also an empty tree)
+  }
+  if(nrow(tree$vals) > 1) { # Check for null root (also an empty tree)
+    if(is.na(tree$vals[2,1])){
       tree$vals[2,] <- c(val,NA,NA,1)
-    } else {
-      if(is.numeric(tree$vals[2,1]) && is.character(val)) {
-        warning("Inserting char will cause previous values to convert to char.")
-      }
-      tree$vals <- push_helper(2,val,tree$vals)
     }
   }
-    return(tree$vals)
- }
-
+  # check if converting from numeric tree to char tree
+  if(is.numeric(tree$vals[2,1]) && is.character(val)) {
+    warning("Inserting char will cause previous values to convert to char.")
+  }
+  tree$vals <- push_helper(2,val,tree$vals)
+}
 
 
 #' Inserts value into the tree following binary tree order
@@ -208,6 +206,7 @@ pop.bintree <- function(tree) {
       top <- tree$vals[2,1]
       if(tree$vals[2,4] == 1) tree$vals[2,] <- NA # check if duplicates remain
       else tree$vals[2,4] <- as.numeric(tree$vals[2,4]) - 1
+      names(top) <- NULL
       return(top)
     }
     if(tree$vals[2,4] == 1) { # move right subtree to root (row 2 in matrix)
@@ -215,10 +214,12 @@ pop.bintree <- function(tree) {
       top <- tree$vals[2,1]
       tree$vals[2,] <- tree$vals[newRoot,]
       tree$vals[newRoot,] <- NA
+      names(top) <- NULL
       return(top)
     } else { # duplicates remain, decrement count
       top <- tree$vals[2,1]
       tree$vals[2,4] <- as.numeric(tree$vals[2,4]) - 1
+      names(top) <- NULL
       return(top)
     }
   }
