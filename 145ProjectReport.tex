@@ -8,7 +8,7 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
+\lstset{
   language=R,
   aboveskip=3mm,
   belowskip=3mm,
@@ -34,7 +34,7 @@
 \maketitle
 
 \section{No Pointers, No Problem}
-As frequent programmers of languages such as Java and Python, our group is very accustomed to incorporating pointers in our programs. For example, simulating stacks, queues, and binary trees would have been easy with Python’s internal pointers by just using a list, and having the push/pop functions update that list that is passed by pointer:
+As frequent programmers of object-oriented languages such as Java and Python, our group is very accustomed to incorporating pointers in our programs. For example, simulating stacks, queues, and binary trees would have been easy with Python’s internal pointers by just using a list, and having the push/pop functions update that list that is passed by pointer:
 
 \begin{lstlisting}
 def s(stack, op, val):
@@ -47,7 +47,7 @@ stack = [1,2,3]
 s(stack,1,4) # push 4. stack = [1,2,3,4]
 itm = s(stack,2,0) # pop stack. stack = [1,2,3], itm = 4
 \end{lstlisting}
-\\\\Because of R's lack of pointers, we are faced an additional challenge: updating our data structures keeping in mind that R has no ``side effects''. In the beginning, it seemed that an easy solution for this was to reassign the copied data structure that the push/pop function was changing. 
+\\\\Because of R's functional nature and its lack of pointers, we are faced an additional challenge: updating our data structures keeping in mind that R has no ``side effects''. In the beginning, it seemed that an easy solution for this was to reassign the copied data structure that the push/pop function was changing. 
 
 \begin{lstlisting}
 s <- function(stack, op, val=NULL){
@@ -186,28 +186,8 @@ printhelper <- function(obj, row) {
     }
   }
 \end{lstlisting}
-\\\\ Keeping in mind that the insertion of a character string will convert all values of the matrix to characters also, our tree allows that and will account for that when indexing the tree matrix.
-\\Aside from R's built in exception handler that stops the program when a  user attempts to add to the tree a different data type than what is already in it, we add a couple more exceptions. Additional exceptions that stop the program is when a user attempts to add an NA value to the tree, and when the user attempts to pop from the tree when it is empty.
-
-\begin{thebibliography}{99}
-
-\bibitem{r1}
-\textit{Scientific Style and Format: The CBE manual for authors,
-editors and publishers}. Style Manual Committee, Council of Biology Editors.
-Sixth ed. Cambridge University Press, 1994.
-
-\bibitem{r2}
-L.U. Ante, Cem surgere: Surgite postquam sederitis, qui manducatis panem doloris,
-\textit{Omnes} \textbf{13} (1916), 114--119.
-
-\bibitem{r3}
-T.X. Confortavit, \textit{Seras}, Portarum, New York, 1995.
-
-\bibitem{r4}
-P.A. Deus, Ater hoc et filius et mater praestet nobis,
-\textit{Paterhoc} \textbf{66} (1993), 856--890.
-
-\end{thebibliography}
+\\\\ Keeping in mind that the insertion of a character string will convert all values of the matrix to characters also, our tree allows that and will account for that when indexing the tree matrix. When the user tries to insert a character string to an integer valued tree, it will warn the user. From then on, tree insertion will be based on ASCII values.
+\\\\Aside from R's built in exception handler that stops the program when a  user attempts to add to the tree a different data type than what is already in it, we add a couple more exceptions. Additional exceptions that stop the program is when a user attempts to add an NA value to the tree, and when the user attempts to pop from the tree when it is empty.
 
 
 \end{document}
