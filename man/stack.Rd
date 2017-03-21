@@ -15,7 +15,11 @@
 \usage{
 	newstack()
 	push(obj,val)
+<<<<<<< HEAD
 	pop(obj)
+=======
+	pop(obj,val)
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	push.stack(obj,val)
 	pop.stack(obj)
 	print.stack(obj)
@@ -64,7 +68,11 @@
 
 \examples{
 	# Initialize and set up our stack
+<<<<<<< HEAD
 	stack <- newstack()
+=======
+	queue <- newstack()
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 
 	# attempt to pop empty stack, will result in warning
 	pop(stack)
@@ -87,7 +95,11 @@
 	print(stack)
 }
 
+<<<<<<< HEAD
 \author{
+=======
+\authors{
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	Jeffrey Tai
 	John Nguyen
 	Joanne Wang

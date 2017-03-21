@@ -15,7 +15,11 @@
 \usage{
 	newqueue()
 	push(obj,val)
+<<<<<<< HEAD
 	pop(obj)
+=======
+	pop(obj,val)
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	push.queue(obj,val)
 	pop.queue(obj)
 	print.queue(obj)
@@ -87,7 +91,11 @@
 	print(queue)
 }
 
+<<<<<<< HEAD
 \author{
+=======
+\authors{
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	Jeffrey Tai
 	John Nguyen
 	Joanne Wang

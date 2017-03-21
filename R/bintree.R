@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #' Constructor for binary tree class object
 #'
 #' \code{newbintree} returns the instantiated newbintree object
@@ -12,6 +13,10 @@
 #' q <- newbintree()
 #'
 #' @export
+=======
+# bintree.r
+
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 newbintree <- function(){
   tree <- new.env(parent=globalenv()) 
   tree$vals <- matrix(cbind(NA,NA,NA,NA),nrow=1,ncol=4, dimnames = list(c(NULL),
@@ -21,6 +26,7 @@ newbintree <- function(){
   return(tree)
 }
 
+<<<<<<< HEAD
 
 #' Inserts value into the tree following binary tree order
 #'
@@ -121,6 +127,26 @@ push.bintree <- function(tree,val) {
 #' push_helper(2,val,tree$vals)
 #'
 #' @export
+=======
+push <- function(tree, val) UseMethod("push")
+pop <- function(tree) UseMethod("pop")
+
+#################### push ####################
+push.bintree <- function(tree,val) {
+     if(nrow(tree$vals) == 1){ # Empty Tree
+        tree$vals <- rbind(tree$vals,c(val,NA,NA,1))
+        return(tree$vals)
+     }
+     if(nrow(tree$vals) > 1) { # Check for null root
+        if(is.na(tree$vals[2,1])){
+          tree$vals[2,] <- c(val,NA,NA,1)
+          return(tree$vals)
+        }
+      }
+     tree$vals <- push_helper(2,val,tree$vals)
+     return(tree$vals)
+}
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 push_helper <- function(root, inVal, graph){
   root <- as.numeric(root)
   # base case, insert as left child
@@ -158,6 +184,7 @@ push_helper <- function(root, inVal, graph){
   else push_helper(graph[root,3],inVal,graph)
 }
 
+<<<<<<< HEAD
 
 #' Finds and returns the first row of NA's in the matrix
 #'
@@ -175,6 +202,10 @@ push_helper <- function(root, inVal, graph){
 #' push_firstNArow(graph)
 #'
 #' @export
+=======
+# helper method that finds the first row of NA's
+# in graph so to insert new value appropriately
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 push_firstNArow <- function(graph) {
   for(i in 2:nrow(graph)) {
     if(all(is.na(graph[i,]))) return(i)
@@ -182,6 +213,7 @@ push_firstNArow <- function(graph) {
   return(-1) # all rows taken, return -1
 }
 
+<<<<<<< HEAD
 
 #' Removes the smallest value from the matrix and returns that value
 #'
@@ -198,6 +230,9 @@ push_firstNArow <- function(graph) {
 #' pop(tree)
 #'
 #' @export
+=======
+#################### pop ####################
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 pop.bintree <- function(tree) {
   if(nrow(tree$vals) < 2 || is.na(tree$vals[2,1])) stop("Tree is empty")
   if(is.na(tree$vals[2,2])) { # checks if root is smallest item (no left subtree)
@@ -223,6 +258,7 @@ pop.bintree <- function(tree) {
 
 }
 
+<<<<<<< HEAD
 
 #' Removes the smallest value in the tree and returns it
 #'
@@ -241,6 +277,8 @@ pop.bintree <- function(tree) {
 #' push_helper(tree,tree$vals[2,2],2)
 #'
 #' @export
+=======
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 pop_helper <- function(tree, row, parent) {
   row <- as.numeric(row)
   parent <- as.numeric(parent)
@@ -266,6 +304,7 @@ pop_helper <- function(tree, row, parent) {
   pop_helper(tree, tree$vals[as.numeric(row),2], row)
 }
 
+<<<<<<< HEAD
 #' Prints out the binary tree
 #'
 #' \code{print} will print nothing if the binary tree is empty.
@@ -281,6 +320,9 @@ pop_helper <- function(tree, row, parent) {
 #' print(tree)
 #'
 #' @export
+=======
+#################### print ####################
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 print.bintree <- function(tree) {
   obj <- tree$vals
   colnames(obj) <- NULL
@@ -295,6 +337,12 @@ print.bintree <- function(tree) {
   }
   if(nrow(obj) > 1) {
     if(!is.na(obj[2,1])) printhelper(obj,2)
+<<<<<<< HEAD
+=======
+    else print("Tree is empty.")
+  } else {
+    print("Tree is empty.")
+>>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
   }
 }
 
