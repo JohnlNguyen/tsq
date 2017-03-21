@@ -15,11 +15,7 @@
 \usage{
 	newstack()
 	push(obj,val)
-<<<<<<< HEAD
 	pop(obj)
-=======
-	pop(obj,val)
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	push.stack(obj,val)
 	pop.stack(obj)
 	print.stack(obj)
@@ -68,11 +64,7 @@
 
 \examples{
 	# Initialize and set up our stack
-<<<<<<< HEAD
 	stack <- newstack()
-=======
-	queue <- newstack()
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 
 	# attempt to pop empty stack, will result in warning
 	pop(stack)
@@ -80,26 +72,19 @@
 	# push values into the stack
 	push(stack,1)
 	push(stack,2)
-	push(stack,3)
-	push(stack,4)
 
 	# pop the element at the top of the stack, returns 4
 	pop(stack)
 
 	# push more values onto the top of the stack
 	push(stack,5)
-	push(stack,6)
-	push(stack,7)
+	push(stack,"hello")
 
 	# print out the stack
 	print(stack)
 }
 
-<<<<<<< HEAD
 \author{
-=======
-\authors{
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	Jeffrey Tai
 	John Nguyen
 	Joanne Wang

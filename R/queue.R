@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #' Constructor for queue class object
 #'
 #' \code{newqueue} returns the instantiated newqueue object
@@ -11,9 +10,6 @@
 #' q <- newqueue()
 #'
 #' @export
-=======
-
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 newqueue <- function() {
   q <- new.env(parent=globalenv()) 
   q$data <- c(NA)
@@ -21,7 +17,6 @@ newqueue <- function() {
   return(q)
 }
 
-<<<<<<< HEAD
 
 #' Inserts value after the current last element in the vector
 #'
@@ -96,17 +91,11 @@ pop <- function(obj) UseMethod("pop")
 #' push(q,"Give me 100 cookies!")
 #'
 #' @export
-=======
-push <- function(obj, val) UseMethod("push") 
-pop <- function(obj, val) UseMethod("pop") 
-
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 push.queue <- function(obj,val) { 
   if(is.na(val)) stop("Invalid type")
   obj$data <- c(obj$data,val) 
 }
 
-<<<<<<< HEAD
 
 #' Removes first element from the vector and returns that value
 #'
@@ -126,8 +115,6 @@ push.queue <- function(obj,val) {
 #' pop(q)
 #'
 #' @export
-=======
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 pop.queue <- function(obj) {
   if(length(obj$data) == 1)
     stop("Queue is empty")
@@ -137,7 +124,6 @@ pop.queue <- function(obj) {
 }
 
 
-<<<<<<< HEAD
 #' Prints out the queue
 #'
 #' \code{print} will return nothing if the queue is empty (if the
@@ -154,8 +140,6 @@ pop.queue <- function(obj) {
 #' print(q)
 #'
 #' @export
-=======
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 print.queue <- function(obj){
   if(length(obj$data) == 1) return()
   print(obj$data[-1])

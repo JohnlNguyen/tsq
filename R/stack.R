@@ -1,27 +1,22 @@
-<<<<<<< HEAD
 #' Constructor for stack class object
 #'
-#' \code{stack} returns the instantiated stack object
+#' \code{newstack} returns the instantiated stack object
 #'
 #' This constructor implementation involves instantiating a new
 #' Environment with each new instance of a stack, along with the
 #' class attribute appended with the name of the structure.
 #' 
 #' @examples
-#' s <- stack()
+#' s <- newstack()
 #'
 #' @export
-stack <- function() {
-=======
 newstack <- function() {
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
   st <- new.env(parent=globalenv())  
   st$data <- c(NA)
-  class(st) <- append(class(st), "stack")
+  class(st) <- append(class(st), "newstack")
   return(st)
 }
 
-<<<<<<< HEAD
 
 #' Inserts value after the current last element in the vector
 #'
@@ -96,17 +91,11 @@ pop <- function(obj) UseMethod("pop")
 #' push(q,"Give me 100 cookies!")
 #'
 #' @export
-=======
-push <- function(obj, val) UseMethod("push") 
-pop <- function(obj, val) UseMethod("pop") 
-
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 push.stack <- function(obj,val) { 
   if(is.na(val)) stop("Invalid type")
   obj$data <- c(obj$data,val) 
 }
 
-<<<<<<< HEAD
 
 #' Removes last element from the vector and returns that value
 #'
@@ -126,8 +115,6 @@ push.stack <- function(obj,val) {
 #' pop(s)
 #'
 #' @export
-=======
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 pop.stack <- function(obj) {
   if(length(obj$data) == 1)
     stop("Stack is empty")
@@ -137,7 +124,6 @@ pop.stack <- function(obj) {
   return(top)
 }
 
-<<<<<<< HEAD
 
 #' Prints out the stack
 #'
@@ -155,8 +141,6 @@ pop.stack <- function(obj) {
 #' print(s)
 #'
 #' @export
-=======
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 print.stack <- function(obj){
   if(length(obj$data) == 1) return()
   print(obj$data[-1])

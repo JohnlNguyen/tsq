@@ -15,11 +15,7 @@
 \usage{
 	newqueue()
 	push(obj,val)
-<<<<<<< HEAD
 	pop(obj)
-=======
-	pop(obj,val)
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	push.queue(obj,val)
 	pop.queue(obj)
 	print.queue(obj)
@@ -76,26 +72,19 @@
 	# push values into the queue
 	push(queue,1)
 	push(queue,2)
-	push(queue,3)
-	push(queue,4)
 
 	# pop the element at front of the queue, returns 1
 	pop(queue)
 
 	# push more values into the queue
 	push(queue,5)
-	push(queue,6)
-	push(queue,7)
+	push(queue,"hello")
 
 	# print out the queue
 	print(queue)
 }
 
-<<<<<<< HEAD
 \author{
-=======
-\authors{
->>>>>>> 0caae9178b02d7186db168d310f616ba1c9b3d4d
 	Jeffrey Tai
 	John Nguyen
 	Joanne Wang
