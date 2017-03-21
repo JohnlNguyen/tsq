@@ -1,4 +1,6 @@
 export(push,pop,
+	newbintree,push.bintree,push_helper,push_firstNArow,
+	  pop.bintree,pop_helper,print.bintree,
 	newqueue,push.queue,pop.queue,print.queue,
-	stack,push.stack,pop.stack,print.stack
+	newstack,push.stack,pop.stack,print.stack
 )

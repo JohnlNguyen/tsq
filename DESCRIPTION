@@ -7,10 +7,9 @@ Authors: Jeffrey Tai <jetai@ucdavis.edu> [cre,aut],
 Title: Package for S3 Implementations of Binary Tree, Stack, Queue
 Description: Provides S3 classes and methods for binary tree,
 	stack, and queue data structures in R.
-Depends: R (>= 3.3.2)
 ByteCompile: yes
 NeedsCompilation: no
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/JohnlNguyen/Project_145
-BugReports: https://github.com/JohnlNguyen/Project_145
+URL: https://github.com/JohnlNguyen/tsq
+BugReports: https://github.com/JohnlNguyen/tsq

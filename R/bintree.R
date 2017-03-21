@@ -1,5 +1,17 @@
-# bintree.r
-
+#' Constructor for binary tree class object
+#'
+#' \code{newbintree} returns the instantiated newbintree object
+#'
+#' This constructor implementation involves instantiating a new
+#' Environment with each new instance of a binary tree, along with the
+#' class attribute appended with the name of the structure.
+#' 
+#' @return The instantiated newbintree object.
+#'
+#' @examples
+#' q <- newbintree()
+#'
+#' @export
 newbintree <- function(){
   tree <- new.env(parent=globalenv()) 
   tree$vals <- matrix(cbind(NA,NA,NA,NA),nrow=1,ncol=4, dimnames = list(c(NULL),
@@ -9,28 +21,109 @@ newbintree <- function(){
   return(tree)
 }
 
+
+#' Inserts value into the tree following binary tree order
+#'
+#' \code{push} returns the modified matrix
+#'
+#' This is a generic function: methods can be defined for it
+#' directly. For this to work properly, the arguments
+#' \code{tree} and \code{val} should be a newbintree (Environment)
+#' object and a character/numeric vector, respectively.
+#' 
+#' @param tree An Environment object.
+#' @param val Numeric or character vectors.
+#' 
+#' @return If all inputs are integer, then the returned vector
+#' will be a matrix of numeric values. If all inputs are integer and
+#' character values, then the integers will be converted to
+#' characters and the returned matrix will be a matrix of characters.
+#'
+#' @examples
+#' push(tree,5)
+#' push(tree,"hi there")
+#'
+#' @export
 push <- function(tree, val) UseMethod("push")
+
+#' Removes the smallest value from the matrix and returns that value
+#'
+#' \code{push} returns the popped value
+#'
+#' This is a generic function: methods can be defined for it
+#' directly. For this to work properly, the arguments
+#' \code{tree} should be a newbintree (Environment) object.
+#' 
+#' @param tree An Environment object.
+#' 
+#' @return If all inputs are integer, then the returned vector
+#' will be a matrix of numeric values. If all inputs are integer and
+#' character values, then the integers will be converted to
+#' characters and the returned matrix will be a matrix of characters.
+#'
+#' @examples
+#' pop(tree)
+#'
+#' @export
 pop <- function(tree) UseMethod("pop")
 
-#################### push ####################
+
+#' Inserts value into the tree following binary tree order
+#'
+#' \code{push} returns the modified matrix
+#'
+#' This is the function that the generic function \code{push} will
+#' dispatch to when called.
+#' 
+#' @param tree An Environment object.
+#' @param val Numeric or character vectors.
+#' 
+#' @return If all inputs are integer, then the returned vector
+#' will be a matrix of numeric values. If all inputs are integer and
+#' character values, then the integers will be converted to
+#' characters and the returned matrix will be a matrix of characters.
+#'
+#' @examples
+#' push(tree,5)
+#' push(tree,"hi there")
+#'
+#' @export
 push.bintree <- function(tree,val) {
   if(nrow(tree$vals) == 1){ # Empty Tree
     tree$vals <- rbind(tree$vals,c(val,NA,NA,1))
-    return(tree$vals)
-  }
-  if(nrow(tree$vals) > 1) { # Check for null root (also an empty tree)
-    if(is.na(tree$vals[2,1])){
+
+  } else { 
+    if(is.na(tree$vals[2,1])){ # Check for null root (also an empty tree)
       tree$vals[2,] <- c(val,NA,NA,1)
-      return(tree$vals)
+    } else {
+      if(is.numeric(tree$vals[2,1]) && is.character(val)) {
+        warning("Inserting char will cause previous values to convert to char.")
+      }
+      tree$vals <- push_helper(2,val,tree$vals)
     }
   }
-  # check if converting from numeric tree to char tree
-  if(is.numeric(tree$vals[2,1]) && is.character(val)) {
-    warning("Inserting char will cause previous values to convert to char.")
-  }
-  tree$vals <- push_helper(2,val,tree$vals)
-  return(tree$vals)
-}
+    return(tree$vals)
+ }
+
+
+
+#' Inserts value into the tree following binary tree order
+#'
+#' \code{push_helper} returns the modified matrix
+#'
+#' This is the helper function that the function \code{push} will call
+#' to insert the value into the binary tree.
+#'
+#' @param root The row to begin the tree traversal.
+#' @param inVal Numeric or character vectors.
+#' @param graph The matrix to be modified.
+#' 
+#' @return The modified matrix after the insertion.
+#'
+#' @examples
+#' push_helper(2,val,tree$vals)
+#'
+#' @export
 push_helper <- function(root, inVal, graph){
   root <- as.numeric(root)
   # base case, insert as left child
@@ -68,8 +161,23 @@ push_helper <- function(root, inVal, graph){
   else push_helper(graph[root,3],inVal,graph)
 }
 
-# helper method that finds the first row of NA's
-# in graph so to insert new value appropriately
+
+#' Finds and returns the first row of NA's in the matrix
+#'
+#' \code{push_firstNArow} returns the first row of NA's
+#'
+#' This is the helper function that the function \code{push_helper}
+#' will call to find the first available row to insert the value
+#' for either base case.
+#'
+#' @param graph The matrix to be searched.
+#' 
+#' @return The row in the matrix containing the first row of NA's
+#'
+#' @examples
+#' push_firstNArow(graph)
+#'
+#' @export
 push_firstNArow <- function(graph) {
   for(i in 2:nrow(graph)) {
     if(all(is.na(graph[i,]))) return(i)
@@ -77,7 +185,22 @@ push_firstNArow <- function(graph) {
   return(-1) # all rows taken, return -1
 }
 
-#################### pop ####################
+
+#' Removes the smallest value from the matrix and returns that value
+#'
+#' \code{push} returns the popped value
+#'
+#' This is the function that the generic function \code{pop} will
+#' dispatch to when called.
+#' 
+#' @param tree An Environment object.
+#' 
+#' @return The popped value.
+#'
+#' @examples
+#' pop(tree)
+#'
+#' @export
 pop.bintree <- function(tree) {
   if(nrow(tree$vals) < 2 || is.na(tree$vals[2,1])) stop("Tree is empty")
   if(is.na(tree$vals[2,2])) { # checks if root is smallest item (no left subtree)
@@ -103,6 +226,24 @@ pop.bintree <- function(tree) {
 
 }
 
+
+#' Removes the smallest value in the tree and returns it
+#'
+#' \code{pop_helper} returns the modified matrix
+#'
+#' This is the helper function that the function \code{pop} will call
+#' to remove the smallest value from the binary tree.
+#'
+#' @param tree The matrix to be modified.
+#' @param row The row to searching for the smallest element.
+#' @param parent The parent row.
+#' 
+#' @return The popped value.
+#'
+#' @examples
+#' push_helper(tree,tree$vals[2,2],2)
+#'
+#' @export
 pop_helper <- function(tree, row, parent) {
   row <- as.numeric(row)
   parent <- as.numeric(parent)
@@ -128,7 +269,21 @@ pop_helper <- function(tree, row, parent) {
   pop_helper(tree, tree$vals[as.numeric(row),2], row)
 }
 
-#################### print ####################
+#' Prints out the binary tree
+#'
+#' \code{print} will print nothing if the binary tree is empty.
+#' 
+#' @param tree An Environment class object.
+#' 
+#' @return If all inputs are integer, then the returned vector
+#' will be a matrix of numeric values. If all inputs are integer and
+#' character values, then the integers will be converted to
+#' characters and the returned matrix will be a matrix of characters.
+#'
+#' @examples
+#' print(tree)
+#'
+#' @export
 print.bintree <- function(tree) {
   obj <- tree$vals
   colnames(obj) <- NULL
@@ -143,9 +298,6 @@ print.bintree <- function(tree) {
   }
   if(nrow(obj) > 1) {
     if(!is.na(obj[2,1])) printhelper(obj,2)
-    else print("Tree is empty.")
-  } else {
-    print("Tree is empty.")
   }
 }
 
