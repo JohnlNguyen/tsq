@@ -91,6 +91,7 @@ pop <- function(tree) UseMethod("pop")
 push.bintree <- function(tree,val) {
   if(nrow(tree$vals) == 1){ # Empty Tree
     tree$vals <- rbind(tree$vals,c(val,NA,NA,1))
+
   } else { 
     if(is.na(tree$vals[2,1])){ # Check for null root (also an empty tree)
       tree$vals[2,] <- c(val,NA,NA,1)
@@ -101,7 +102,9 @@ push.bintree <- function(tree,val) {
       tree$vals <- push_helper(2,val,tree$vals)
     }
   }
-}
+    return(tree$vals)
+ }
+
 
 
 #' Inserts value into the tree following binary tree order
