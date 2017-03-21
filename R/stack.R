@@ -13,7 +13,7 @@
 newstack <- function() {
   st <- new.env(parent=globalenv())  
   st$data <- c(NA)
-  class(st) <- append(class(st), "newstack")
+  class(st) <- append(class(st), "stack")
   return(st)
 }
 
