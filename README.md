@@ -244,17 +244,3 @@ user attempts to add to the tree a different data type than what is
 already in it, we add a couple more exceptions. Additional exceptions
 that stop the program is when a user attempts to add an NA value to the
 tree, and when the user attempts to pop from the tree when it is empty.
-
-[99]{}
-
-*Scientific Style and Format: The CBE manual for authors, editors and
-publishers*. Style Manual Committee, Council of Biology Editors. Sixth
-ed. Cambridge University Press, 1994.
-
-L.U. Ante, Cem surgere: Surgite postquam sederitis, qui manducatis panem
-doloris, *Omnes* **13** (1916), 114–119.
-
-T.X. Confortavit, *Seras*, Portarum, New York, 1995.
-
-P.A. Deus, Ater hoc et filius et mater praestet nobis, *Paterhoc* **66**
-(1993), 856–890.
